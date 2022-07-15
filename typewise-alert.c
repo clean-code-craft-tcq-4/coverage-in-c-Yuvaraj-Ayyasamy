@@ -2,17 +2,18 @@
 #include <stdio.h>
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
+BreachType  checkResult = NORMAL;
   if(value < lowerLimit) {
-    return TOO_LOW;
+    checkResult = TOO_LOW;
+  } else if(value > upperLimit) {
+    checkResult = TOO_HIGH;
+  } else {
   }
-  if(value > upperLimit) {
-    return TOO_HIGH;
-  }
-  return NORMAL;
+  return checkResult;
 }
 
 BreachType classifyTemperatureBreach(
-    CoolingType coolingType, double temperatureInC) {
+  CoolingType coolingType, double temperatureInC) {
   int lowerLimit = 0;
   int upperLimit = 0;
   switch(coolingType) {
@@ -32,13 +33,8 @@ BreachType classifyTemperatureBreach(
   return inferBreach(temperatureInC, lowerLimit, upperLimit);
 }
 
-void checkAndAlert(
-    AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
-
-  BreachType breachType = classifyTemperatureBreach(
-    batteryChar.coolingType, temperatureInC
-  );
-
+void checkAndAlert( AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
+  BreachType breachType = classifyTemperatureBreach( batteryChar.coolingType, temperatureInC );
   switch(alertTarget) {
     case TO_CONTROLLER:
       sendToController(breachType);
