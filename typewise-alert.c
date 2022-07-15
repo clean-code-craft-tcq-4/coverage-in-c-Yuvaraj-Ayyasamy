@@ -2,14 +2,7 @@
 #include <stdio.h>
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
-BreachType  checkResult = NORMAL;
-  if(value < lowerLimit) {
-    checkResult = TOO_LOW;
-  } else if(value > upperLimit) {
-    checkResult = TOO_HIGH;
-  } else {
-  }
-  return checkResult;
+  return checkBreach(value, lowerLimit, upperLimit);
 }
 
 BreachType classifyTemperatureBreach(
@@ -18,16 +11,15 @@ BreachType classifyTemperatureBreach(
   int upperLimit = 0;
   switch(coolingType) {
     case PASSIVE_COOLING:
-      lowerLimit = 0;
       upperLimit = 35;
       break;
-    case HI_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 45;
-      break;
     case MED_ACTIVE_COOLING:
-      lowerLimit = 0;
+      lowerLimit = 36;
       upperLimit = 40;
+      break;
+    case HI_ACTIVE_COOLING:
+      lowerLimit = 41;
+      upperLimit = 45;
       break;
   }
   return inferBreach(temperatureInC, lowerLimit, upperLimit);
