@@ -2,8 +2,8 @@
 
 typedef enum {
   PASSIVE_COOLING,
-  HI_ACTIVE_COOLING,
-  MED_ACTIVE_COOLING
+  MED_ACTIVE_COOLING,
+  HI_ACTIVE_COOLING
 } CoolingType;
 
 typedef enum {
@@ -14,6 +14,18 @@ typedef enum {
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
+
+#define checkBreach(currentValue, lowerLimit, upperLimit)   \
+({                                                          \
+    int checkResult = NORMAL;                               \
+    if (currentValue < lowerLimit) {                        \
+        checkResult = TOO_LOW;                              \
+    } else if(currentValue > upperLimit) {                  \
+        checkResult = TOO_HIGH;                             \
+    } else {                                                \
+    }                                                       \
+    checkResult;                                            \
+})
 
 typedef enum {
   TO_CONTROLLER,
