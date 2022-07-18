@@ -1,6 +1,8 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 
+char SndMsg[100];
+
 int coolingTypeLimit[3][2] = {
   /* PASSIVE COOLING */
   {PASSIVE_COOLING_LOWLIMIT, PASSIVE_COOLING_HIGHLIMIT},
