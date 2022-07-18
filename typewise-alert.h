@@ -14,7 +14,10 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
+char SndMsg[100];
+
 #define RECEPIENT                    "a.b@c.com"
+#define PRINT(message)               printf("%d", message)
 #define PASSIVE_COOLING_LOWLIMIT     0
 #define PASSIVE_COOLING_HIGHLIMIT    35
 #define MED_ACTIVE_COOLING_LOWLIMIT  PASSIVE_COOLING_LOWLIMIT
@@ -25,19 +28,21 @@ typedef enum {
 #define MSG_HEADER 0xfeed
 #define THROW_CONTROLLERWARNING(breachType)                \
 ({                                                         \
-    printf("%x : %x\n", MSG_HEADER, breachType);           \
+    sprintf(SndMsg, "%x : %x\n", MSG_HEADER, breachType);  \
+    PRINT(SndMsg);                                         \
 })
 
 #define MSG_TOO_LOW      "Hi, the temperature is too low\n"
 #define MSG_TOO_HIGH     "Hi, the temperature is too high\n"
-#define Print(message) MSG_##message 
-#define THROW_MAILWARNING(message)                         \
-({                                                         \
-    if (TOO_LOW == message) {                              \
-        printf("To: %s\n %s", RECEPIENT, Print(TOO_LOW));  \
-    } else {                                               \
-        printf("To: %s\n %s", RECEPIENT, Print(TOO_HIGH)); \
-    }                                                      \
+#define MSG(message) MSG_##message 
+#define THROW_MAILWARNING(message)                                \
+({                                                                \
+    if (TOO_LOW == message) {                                     \
+        sprintf(SndMsg, "To: %s\n %s", RECEPIENT, MSG(TOO_LOW));  \
+    } else {                                                      \
+        sprintf(SndMsg, "To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
+    }                                                             \
+    PRINT(SndMsg);                                                \
 })
 
 #define checkBreach(currentValue, lowerLimit, upperLimit)   \
