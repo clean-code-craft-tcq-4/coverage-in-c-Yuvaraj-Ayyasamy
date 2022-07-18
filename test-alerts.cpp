@@ -55,5 +55,5 @@ TEST_CASE("check classify and alert")
 
     BatteryCharacter batteryCharacter = {MED_ACTIVE_COOLING, "EXIDE"};
     checkAndAlert(TO_EMAIL, batteryCharacter, 36);
-    REQUIRE(strcmp(SndMsg, "feed : 1\n") == 0);
+    REQUIRE(strcmp(SndMsg, "feed : 0\n") == 0);
 }
