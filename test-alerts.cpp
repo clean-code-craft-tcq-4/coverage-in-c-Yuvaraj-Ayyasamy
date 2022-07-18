@@ -53,7 +53,7 @@ TEST_CASE("check classify and alert")
     checkAndAlert(TO_CONTROLLER, batteryAttribute, 36);
     //REQUIRE(strcmp(SendMessage, "feed : 1\n") == 0);
 
-    batteryAttribute = {MED_ACTIVE_COOLING, "EXIDE"};
-    checkAndAlert(TO_EMAIL, batteryAttribute, 36);
+    BatteryCharacter batteryCharacter = {MED_ACTIVE_COOLING, "EXIDE"};
+    checkAndAlert(TO_EMAIL, batteryCharacter, 36);
     //REQUIRE(strcmp(SendMessage, "feed : 0\n") == 0);
 }
