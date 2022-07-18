@@ -17,7 +17,7 @@ BreachType classifyTemperatureBreach(CoolingType coolingType, double temperature
 
 #define checkBreach(currentValue, lowerLimit, upperLimit)   \
 ({                                                          \
-    int checkResult = NORMAL;                               \
+    BreachType checkResult = NORMAL;                               \
     if (currentValue < lowerLimit) {                        \
         checkResult = TOO_LOW;                              \
     } else if(currentValue > upperLimit) {                  \
