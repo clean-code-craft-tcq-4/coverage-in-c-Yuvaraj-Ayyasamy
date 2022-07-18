@@ -28,7 +28,7 @@ int coolingTypeLimit[3][2] = {
   {MED_ACTIVE_COOLING_LOWLIMIT, MED_ACTIVE_COOLING_HIGHLIMIT},
   /* HI ACTIVE COOLING */
   {HI_ACTIVE_COOLING_LOWLIMIT, HI_ACTIVE_COOLING_HIGHLIMIT}
-}
+};
 
 #define MSG_HEADER 0xfeed
 #define THROW_CONTROLLERWARNING(breachType)                \
@@ -47,9 +47,6 @@ int coolingTypeLimit[3][2] = {
         printf("To: %s\n %s", RECEPIENT, Print(TOO_HIGH)); \
     }                                                      \
 })
-
-BreachType inferBreach(double value, double lowerLimit, double upperLimit);
-BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
 #define checkBreach(currentValue, lowerLimit, upperLimit)   \
 ({                                                          \
@@ -73,9 +70,9 @@ typedef struct {
   char brand[48];
 } BatteryCharacter;
 
-void checkAndAlert(
-  AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
-
+BreachType inferBreach(double value, double lowerLimit, double upperLimit);
+BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
+void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
 
