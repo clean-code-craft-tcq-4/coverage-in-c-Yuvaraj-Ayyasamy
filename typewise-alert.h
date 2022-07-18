@@ -64,4 +64,4 @@ void checkAndAlert(
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
 
-#endif TYPEWISE_ALERT_H
+#endif // TYPEWISE_ALERT_H
