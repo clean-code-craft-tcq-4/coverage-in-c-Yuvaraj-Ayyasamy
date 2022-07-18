@@ -14,6 +14,7 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
+#define RECEPIENT                    "a.b@c.com"
 #define PASSIVE_COOLING_LOWLIMIT     0
 #define PASSIVE_COOLING_HIGHLIMIT    35
 #define MED_ACTIVE_COOLING_LOWLIMIT  36
@@ -23,14 +24,22 @@ typedef enum {
 #define setLowLimit(message) message##_LOWLIMIT
 #define setHighLimit(message) message##_HIGHLIMIT
 
+#define MSG_HEADER 0xfeed
+#define THROW_CONTROLLERWARNING(breachType)                \
+({                                                         \
+    printf("%x : %x\n", MSG_HEADER, breachType);           \
+})
+
 #define MSG_TOO_LOW      "Hi, the temperature is too low\n"
 #define MSG_TOO_HIGH     "Hi, the temperature is too high\n"
 #define Print(message) MSG_##message 
-
-#define THROW_WARNING(message, recepient)                   \
-({                                                          \
-    printf("To: %s\n", recepient);                          \
-    printf("%s", Print(message));                           \
+#define THROW_MAILWARNING(message)                         \
+({                                                         \
+    if (TOO_LOW == message) {                              \
+        printf("To: %s\n", RECEPIENT, Print(TOO_LOW));     \
+    } else {                                               \
+        printf("To: %s\n", RECEPIENT, Print(TOO_HIGH));    \
+    }                                                      \
 })
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
