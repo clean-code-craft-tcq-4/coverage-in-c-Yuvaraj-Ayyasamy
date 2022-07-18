@@ -1,12 +1,12 @@
 #pragma once
 
-typedef enum {
+enum {
   PASSIVE_COOLING,
   MED_ACTIVE_COOLING,
   HI_ACTIVE_COOLING
 } CoolingType;
 
-typedef enum {
+enum {
   NORMAL,
   TOO_LOW,
   TOO_HIGH
