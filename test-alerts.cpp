@@ -49,7 +49,7 @@ TEST_CASE("check alert mail")
 
 TEST_CASE("check classify and alert")
 {
-    BatteryAttributes battAttribute = {PASSIVE_COOLING, "LUMINOUS"};
-    checkAndAlert(TO_CONTROLLER, battAttribute, 36);
+    BatteryCharacter batteryAttribute = {PASSIVE_COOLING, "LUMINOUS"};
+    checkAndAlert(TO_CONTROLLER, batteryAttribute, 36);
     //REQUIRE(strcmp(SendMessage, "feed : 1\n") == 0);
 }
