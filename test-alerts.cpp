@@ -29,29 +29,29 @@ TEST_CASE("classify breach")
 TEST_CASE("check alert controller")
 {
     sendToController(TOO_LOW);
-    REQUIRE(strcmp(SndMsg, "feed : 0\n") == 0);
-    sendToController(TOO_HIGH);
     REQUIRE(strcmp(SndMsg, "feed : 1\n") == 0);
-    sendToController(NORMAL);
+    sendToController(TOO_HIGH);
     REQUIRE(strcmp(SndMsg, "feed : 2\n") == 0);
+    sendToController(NORMAL);
+    REQUIRE(strcmp(SndMsg, "feed : 0\n") == 0);
 }
 
 TEST_CASE("check alert mail")
 {
     sendToEmail(TOO_LOW);
-    REQUIRE(strcmp(SndMsg, "To: a.b@c.com\nHi, the temperature is TOO LOW\n") == 0);
+    REQUIRE(strcmp(SndMsg, "To: a.b@c.com\nHi, the temperature is too low\n") == 0);
     sendToEmail(TOO_HIGH);
-    REQUIRE(strcmp(SndMsg, "To: a.b@c.com\nHi, the temperature is TOO HIGH\n") == 0);
+    REQUIRE(strcmp(SndMsg, "To: a.b@c.com\nHi, the temperature is too high\n") == 0);
     sendToEmail(NORMAL);
     /* no change from last message */
-    REQUIRE(strcmp(SndMsg, "To: a.b@c.com\nHi, the temperature is TOO HIGH\n") == 0);
+    REQUIRE(strcmp(SndMsg, "To: a.b@c.com\nHi, the temperature is too high\n") == 0);
 }
 
 TEST_CASE("check classify and alert")
 {
     BatteryCharacter batteryAttribute = {PASSIVE_COOLING, "LUMINOUS"};
     checkAndAlert(TO_CONTROLLER, batteryAttribute, 36);
-    REQUIRE(strcmp(SndMsg, "feed : 1\n") == 0);
+    REQUIRE(strcmp(SndMsg, "feed : 2\n") == 0);
 
     BatteryCharacter batteryCharacter = {MED_ACTIVE_COOLING, "EXIDE"};
     checkAndAlert(TO_EMAIL, batteryCharacter, 36);
