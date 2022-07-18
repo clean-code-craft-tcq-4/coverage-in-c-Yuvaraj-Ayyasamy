@@ -14,7 +14,7 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
-char SndMsg[100];
+extern char SndMsg[];
 
 #define RECEPIENT                    "a.b@c.com"
 #define PRINT(message)               printf("%s", message)
