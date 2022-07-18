@@ -1,3 +1,5 @@
+#ifndef TYPEWISE_ALERT_H
+#define TYPEWISE_ALERT_H
 #pragma once
 
 typedef enum {
@@ -61,3 +63,5 @@ void checkAndAlert(
 
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
+
+#endif TYPEWISE_ALERT_H
