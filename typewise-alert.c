@@ -28,7 +28,7 @@ void sendToController(BreachType breachType) {
 
 void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
-  if ( TOO_NORMAL != breachType)
-      THROW_WARNING(breachType, recepient);
+  if ( NORMAL != breachType)
+      THROW_WARNING((BreachType)breachType, recepient);
   }
 }
