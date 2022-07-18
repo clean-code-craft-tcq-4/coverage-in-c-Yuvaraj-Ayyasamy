@@ -17,7 +17,7 @@ typedef enum {
 char SndMsg[100];
 
 #define RECEPIENT                    "a.b@c.com"
-#define PRINT(message)               printf("%d", message)
+#define PRINT(message)               printf("%s", message)
 #define PASSIVE_COOLING_LOWLIMIT     0
 #define PASSIVE_COOLING_HIGHLIMIT    35
 #define MED_ACTIVE_COOLING_LOWLIMIT  PASSIVE_COOLING_LOWLIMIT
