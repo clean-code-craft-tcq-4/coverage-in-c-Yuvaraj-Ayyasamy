@@ -17,12 +17,18 @@ typedef enum {
 #define RECEPIENT                    "a.b@c.com"
 #define PASSIVE_COOLING_LOWLIMIT     0
 #define PASSIVE_COOLING_HIGHLIMIT    35
-#define MED_ACTIVE_COOLING_LOWLIMIT  36
+#define MED_ACTIVE_COOLING_LOWLIMIT  PASSIVE_COOLING_HIGHLIMIT+1
 #define MED_ACTIVE_COOLING_HIGHLIMIT 40
-#define HI_ACTIVE_COOLING_LOWLIMIT   41
+#define HI_ACTIVE_COOLING_LOWLIMIT   MED_ACTIVE_COOLING_HIGHLIMIT+1
 #define HI_ACTIVE_COOLING_HIGHLIMIT  45
-#define setLowLimit(message) message##_LOWLIMIT
-#define setHighLimit(message) message##_HIGHLIMIT
+int coolingTypeLimit[3][2] = {
+  /* PASSIVE COOLING */
+  {PASSIVE_COOLING_LOWLIMIT, PASSIVE_COOLING_HIGHLIMIT},
+  /* MED ACTIVE COOLING */
+  {MED_ACTIVE_COOLING_LOWLIMIT, MED_ACTIVE_COOLING_HIGHLIMIT},
+  /* HI ACTIVE COOLING */
+  {HI_ACTIVE_COOLING_LOWLIMIT, HI_ACTIVE_COOLING_HIGHLIMIT}
+}
 
 #define MSG_HEADER 0xfeed
 #define THROW_CONTROLLERWARNING(breachType)                \
@@ -36,9 +42,9 @@ typedef enum {
 #define THROW_MAILWARNING(message)                         \
 ({                                                         \
     if (TOO_LOW == message) {                              \
-        printf("To: %s\n", RECEPIENT, Print(TOO_LOW));     \
+        printf("To: %s\n %s", RECEPIENT, Print(TOO_LOW));  \
     } else {                                               \
-        printf("To: %s\n", RECEPIENT, Print(TOO_HIGH));    \
+        printf("To: %s\n %s", RECEPIENT, Print(TOO_HIGH)); \
     }                                                      \
 })
 
