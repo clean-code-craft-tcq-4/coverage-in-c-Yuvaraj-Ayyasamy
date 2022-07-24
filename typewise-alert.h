@@ -57,11 +57,6 @@ typedef enum {
     checkResult;                                           \
 })
 
-typedef enum {
-  TO_CONTROLLER,
-  TO_EMAIL
-} AlertTarget;
-
 typedef struct {
   CoolingType coolingType;
   char brand[48];
