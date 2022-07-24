@@ -1,8 +1,6 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 
-char SndMsg[100];
-
 int coolingTypeLimit[3][2] = {
   /* PASSIVE COOLING */
   {PASSIVE_COOLING_LOWLIMIT, PASSIVE_COOLING_HIGHLIMIT},
@@ -11,6 +9,8 @@ int coolingTypeLimit[3][2] = {
   /* HI ACTIVE COOLING */
   {HI_ACTIVE_COOLING_LOWLIMIT, HI_ACTIVE_COOLING_HIGHLIMIT}
 };
+
+void (*alertType[2]) (BreachType breachType) = {sendToController, sendToEmail};
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return checkBreach(value, lowerLimit, upperLimit);
@@ -22,13 +22,9 @@ BreachType classifyTemperatureBreach(CoolingType coolingType, double temperature
   return inferBreach(temperatureInC, lowLimit, highLimit);
 }
 
-void checkAndAlert( AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
+void checkAndAlert( BatteryCharacter batteryChar, double temperatureInC, void (*alertType) (BreachType breachType)) {
   BreachType breachType = classifyTemperatureBreach( batteryChar.coolingType, temperatureInC );
-  if( TO_CONTROLLER == alertTarget) {
-      sendToController(breachType);
-  } else {
-      sendToEmail(breachType);
-  }
+  (*alertType) (breachType);
 }
 
 void sendToController(BreachType breachType) {
