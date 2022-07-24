@@ -24,7 +24,7 @@ typedef enum {
 #define MSG_HEADER 0xfeed
 #define THROW_CONTROLLERWARNING(breachType)                \
 ({                                                         \
-    printf("%x : %x\n", MSG_HEADER, breachType);   \
+    printf("%x : %x\n", MSG_HEADER, breachType);           \
 })
 
 
@@ -32,25 +32,25 @@ typedef enum {
 #define MSG_TOO_LOW      "Hi, the temperature is too low\n"
 #define MSG_TOO_HIGH     "Hi, the temperature is too high\n"
 #define MSG(message) MSG_##message 
-#define THROW_MAILWARNING(message)                                \
-({                                                                \
-    if (TOO_LOW == message) {                                     \
-        printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));  \
-    } else {                                                      \
-        printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
-    }                                                             \
+#define THROW_MAILWARNING(message)                         \
+({                                                         \
+    if (TOO_LOW == message) {                              \
+        printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));    \
+    } else {                                               \
+        printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH));   \
+    }                                                      \
 })
 
-#define checkBreach(currentValue, lowerLimit, upperLimit)   \
-({                                                          \
-    BreachType checkResult = NORMAL;                        \
-    if (currentValue < lowerLimit) {                        \
-        checkResult = TOO_LOW;                              \
-    } else if(currentValue > upperLimit) {                  \
-        checkResult = TOO_HIGH;                             \
-    } else {                                                \
-    }                                                       \
-    checkResult;                                            \
+#define checkBreach(currentValue, lowerLimit, upperLimit)  \
+({                                                         \
+    BreachType checkResult = NORMAL;                       \
+    if (currentValue < lowerLimit) {                       \
+        checkResult = TOO_LOW;                             \
+    } else if(currentValue > upperLimit) {                 \
+        checkResult = TOO_HIGH;                            \
+    } else {                                               \
+    }                                                      \
+    checkResult;                                           \
 })
 
 typedef enum {
