@@ -2,6 +2,8 @@
 #define TYPEWISE_ALERT_H
 #pragma once
 
+#include <stdio.h>
+
 typedef enum {
   PASSIVE_COOLING,
   MED_ACTIVE_COOLING,
@@ -26,7 +28,6 @@ typedef enum {
 ({                                                         \
     printf("%x : %x\n", MSG_HEADER, breachType);           \
 })
-
 
 #define RECEPIENT        "a.b@c.com"
 #define MSG_TOO_LOW      "Hi, the temperature is too low\n"
