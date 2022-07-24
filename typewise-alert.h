@@ -14,10 +14,6 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
-extern char SndMsg[];
-
-#define RECEPIENT                    "a.b@c.com"
-#define PRINT(message)               printf("%s", message)
 #define PASSIVE_COOLING_LOWLIMIT     0
 #define PASSIVE_COOLING_HIGHLIMIT    35
 #define MED_ACTIVE_COOLING_LOWLIMIT  PASSIVE_COOLING_LOWLIMIT
@@ -28,21 +24,21 @@ extern char SndMsg[];
 #define MSG_HEADER 0xfeed
 #define THROW_CONTROLLERWARNING(breachType)                \
 ({                                                         \
-    sprintf(SndMsg, "%x : %x\n", MSG_HEADER, breachType);  \
-    PRINT(SndMsg);                                         \
+    printf("%x : %x\n", MSG_HEADER, breachType);   \
 })
 
+
+#define RECEPIENT        "a.b@c.com"
 #define MSG_TOO_LOW      "Hi, the temperature is too low\n"
 #define MSG_TOO_HIGH     "Hi, the temperature is too high\n"
 #define MSG(message) MSG_##message 
 #define THROW_MAILWARNING(message)                                \
 ({                                                                \
     if (TOO_LOW == message) {                                     \
-        sprintf(SndMsg, "To: %s\n %s", RECEPIENT, MSG(TOO_LOW));  \
+        printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));  \
     } else {                                                      \
-        sprintf(SndMsg, "To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
+        printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
     }                                                             \
-    PRINT(SndMsg);                                                \
 })
 
 #define checkBreach(currentValue, lowerLimit, upperLimit)   \
@@ -69,7 +65,7 @@ typedef struct {
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
-void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
+void checkAndAlert(BatteryCharacter batteryChar, double temperatureInC, void (*alertType) (BreachType breachType));
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
 
