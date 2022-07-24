@@ -4,6 +4,9 @@
 
 #include <stdio.h>
 
+#define LOWLIMIT  0
+#define HIGHLIMIT 1
+
 typedef enum {
   PASSIVE_COOLING,
   MED_ACTIVE_COOLING,
