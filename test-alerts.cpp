@@ -33,4 +33,7 @@ TEST_CASE("check classify and alert")
 
     BatteryCharacter batteryCharacter = {MED_ACTIVE_COOLING, "EXIDE"};
     checkAndAlert(batteryCharacter, 46, sendToEmail);
+  
+    BatteryCharacter batteryCharacter = {PASSIVE_COOLING, "AMARON"};
+    checkAndAlert(batteryCharacter, -1, sendToEmail);
 }
