@@ -1,4 +1,5 @@
 #include "typewise-alert.h"
+int noOfChar;
 
 int coolingTypeLimit[3][2] = {
   /* PASSIVE COOLING */
