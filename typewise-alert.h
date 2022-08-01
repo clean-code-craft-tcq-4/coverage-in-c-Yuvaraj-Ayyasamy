@@ -32,6 +32,7 @@ typedef enum {
 #define THROW_CONTROLLERWARNING(breachType)                         \
 ({                                                                  \
     noOfChar = printf("%x : %x\n", MSG_HEADER, breachType);         \
+    printf("%d\n", noOfChar);                                       \
 })
 
 #define RECEPIENT        "a.b@c.com"
@@ -45,6 +46,7 @@ typedef enum {
     } else {                                                        \
         noOfChar = printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
     }                                                               \
+    printf("%d\n", noOfChar);                                       \
 })
 
 #define checkBreach(currentValue, lowerLimit, upperLimit)           \
