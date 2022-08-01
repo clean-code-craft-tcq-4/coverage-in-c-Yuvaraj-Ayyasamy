@@ -7,7 +7,7 @@
 #define LOWLIMIT  0
 #define HIGHLIMIT 1
 
-static int noOfChar = 0;
+int noOfChar = 0;
 
 typedef enum {
   PASSIVE_COOLING,
