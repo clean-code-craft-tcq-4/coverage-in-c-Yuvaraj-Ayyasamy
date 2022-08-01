@@ -25,9 +25,9 @@ void checkAndAlert( BatteryCharacter batteryChar, double temperatureInC, void (*
 }
 
 void sendToController(BreachType breachType) {
-  THROW_CONTROLLERWARNING(breachType);
+  (void)THROW_CONTROLLERWARNING(breachType);
 }
 
 void sendToEmail(BreachType breachType) {
-  THROW_MAILWARNING(breachType);
+  (void)THROW_MAILWARNING(breachType);
 }
