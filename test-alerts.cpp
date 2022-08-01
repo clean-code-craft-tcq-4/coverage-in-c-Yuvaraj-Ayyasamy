@@ -30,13 +30,13 @@ TEST_CASE("check classify and alert")
 {
     BatteryCharacter batteryAttribute = {PASSIVE_COOLING, "LUMINOUS"};
     checkAndAlert(batteryAttribute, 36, sendToController);
-    REQUIRE(classifyTemperatureBreach(noOfChar == 9));
+    REQUIRE(noOfChar == 9);
 
     BatteryCharacter batteryCharacter = {MED_ACTIVE_COOLING, "EXIDE"};
     checkAndAlert(batteryCharacter, 46, sendToEmail);
-    REQUIRE(classifyTemperatureBreach(noOfChar == 47));
+    REQUIRE(noOfChar == 47);
 
     BatteryCharacter batteryCharacter1 = {PASSIVE_COOLING, "AMARON"};
     checkAndAlert(batteryCharacter1, -1, sendToEmail);
-    REQUIRE(classifyTemperatureBreach(noOfChar == 46));
+    REQUIRE(noOfChar == 46);
 }
