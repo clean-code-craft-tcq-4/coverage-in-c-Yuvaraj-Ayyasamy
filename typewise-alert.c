@@ -1,5 +1,4 @@
 #include "typewise-alert.h"
-int noOfChar;
 
 int coolingTypeLimit[3][2] = {
   /* PASSIVE COOLING */
@@ -26,9 +25,9 @@ void checkAndAlert( BatteryCharacter batteryChar, double temperatureInC, void (*
 }
 
 void sendToController(BreachType breachType) {
-  noOfChar = THROW_CONTROLLERWARNING(breachType);
+  THROW_CONTROLLERWARNING(breachType);
 }
 
 void sendToEmail(BreachType breachType) {
-  noOfChar = THROW_MAILWARNING(breachType);
+  THROW_MAILWARNING(breachType);
 }
