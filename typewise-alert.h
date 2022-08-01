@@ -7,6 +7,8 @@
 #define LOWLIMIT  0
 #define HIGHLIMIT 1
 
+static int n = 0;
+
 typedef enum {
   PASSIVE_COOLING,
   MED_ACTIVE_COOLING,
@@ -27,34 +29,37 @@ typedef enum {
 #define HI_ACTIVE_COOLING_HIGHLIMIT  45
 
 #define MSG_HEADER 0xfeed
-#define THROW_CONTROLLERWARNING(breachType)                \
-({                                                         \
-    printf("%x : %x\n", MSG_HEADER, breachType);           \
+#define THROW_CONTROLLERWARNING(breachType)                  \
+({                                                           \
+    n = printf("%x : %x\n", MSG_HEADER, breachType);         \
+     printf("%d", n);  \
 })
 
 #define RECEPIENT        "a.b@c.com"
 #define MSG_TOO_LOW      "Hi, the temperature is too low\n"
 #define MSG_TOO_HIGH     "Hi, the temperature is too high\n"
 #define MSG(message) MSG_##message 
-#define THROW_MAILWARNING(message)                         \
-({                                                         \
-    if (TOO_LOW == message) {                              \
-        printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));    \
-    } else {                                               \
-        printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH));   \
-    }                                                      \
+#define THROW_MAILWARNING(message)                           \
+({                                                           \
+    if (TOO_LOW == message) {                                \
+        n = printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));  \
+       printf("%d", n);  \
+    } else {                                                 \
+        n = printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
+         printf("%d", n);  \
+    }                                                        \
 })
 
-#define checkBreach(currentValue, lowerLimit, upperLimit)  \
-({                                                         \
-    BreachType checkResult = NORMAL;                       \
-    if (currentValue < lowerLimit) {                       \
-        checkResult = TOO_LOW;                             \
-    } else if(currentValue > upperLimit) {                 \
-        checkResult = TOO_HIGH;                            \
-    } else {                                               \
-    }                                                      \
-    checkResult;                                           \
+#define checkBreach(currentValue, lowerLimit, upperLimit)   \
+({                                                          \
+    BreachType checkResult = NORMAL;                        \
+    if (currentValue < lowerLimit) {                        \
+        checkResult = TOO_LOW;                              \
+    } else if(currentValue > upperLimit) {                  \
+        checkResult = TOO_HIGH;                             \
+    } else {                                                \
+    }                                                       \
+    checkResult;                                            \
 })
 
 typedef struct {
