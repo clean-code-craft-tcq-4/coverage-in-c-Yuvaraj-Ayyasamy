@@ -7,8 +7,6 @@
 #define LOWLIMIT  0
 #define HIGHLIMIT 1
 
-extern int noOfChar;
-
 typedef enum {
   PASSIVE_COOLING,
   MED_ACTIVE_COOLING,
@@ -31,7 +29,7 @@ typedef enum {
 #define MSG_HEADER 0xfeed
 #define THROW_CONTROLLERWARNING(breachType)                         \
 ({                                                                  \
-    noOfChar = printf("%x : %x\n", MSG_HEADER, breachType);         \
+    printf("%x : %x\n", MSG_HEADER, breachType);                    \
 })
 
 #define RECEPIENT        "a.b@c.com"
@@ -41,9 +39,9 @@ typedef enum {
 #define THROW_MAILWARNING(message)                                  \
 ({                                                                  \
     if (TOO_LOW == message) {                                       \
-        noOfChar = printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));  \
+        printf("To: %s\n %s", RECEPIENT, MSG(TOO_LOW));             \
     } else {                                                        \
-        noOfChar = printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH)); \
+        printf("To: %s\n %s", RECEPIENT, MSG(TOO_HIGH));            \
     }                                                               \
 })
 
